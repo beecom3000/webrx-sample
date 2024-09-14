@@ -106,13 +106,18 @@ const activateXr = async () => {
   camera.matrixAutoUpdate = false;
 
   // Initialize a WebXR session using "immersive-ar".
-  const session: XRSession | undefined = await navigator.xr?.requestSession('inline');
-  if (session === undefined) {
-    throw new Error('No XRSession created');
+  try {
+    const session: XRSession | undefined = await navigator.xr?.requestSession('immersive-ar');
+    if (session === undefined) {
+      throw new Error('No XRSession created');
+    }
+    await session.updateRenderState({
+      baseLayer: new XRWebGLLayer(session, gl)
+    });
+  } catch(error) {
+    message.value = 'Failed to request session: ' + (error?.message ?? 'None');
+    throw error;
   }
-  await session.updateRenderState({
-    baseLayer: new XRWebGLLayer(session, gl)
-  });
 
 // A 'local' reference space has a native origin that is located
 // near the viewer's position at the time the session was created.
