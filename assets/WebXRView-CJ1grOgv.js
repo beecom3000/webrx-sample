@@ -1,4 +1,4 @@
-import{d as Ia,r as vo,b as xo,o as Br,c as zr,t as Na,e as Mo,f as Os,g as So,h as Eo,w as yo,a as ri,_ as To}from"./index-mcYPuXTt.js";const Ao={key:0},bo={key:1},Ro=Ia({__name:"ErrorHandler",setup(i){const e=vo({error:null,errorMessage:""});return xo(t=>{e.error=t,e.errorMessage=t.message}),(t,n)=>e?(Br(),zr("div",Ao,Na(e.errorMessage),1)):(Br(),zr("div",bo,[Mo(t.$slots,"default")]))}});/**
+import{d as Ia,r as vo,b as xo,o as Br,c as zr,t as Na,e as Mo,f as Os,g as So,h as Eo,w as yo,a as ri,_ as To}from"./index-DSw-BNEF.js";const Ao={key:0},bo={key:1},Ro=Ia({__name:"ErrorHandler",setup(i){const e=vo({error:null,errorMessage:""});return xo(t=>{e.error=t,e.errorMessage=t.message}),(t,n)=>e.error?(Br(),zr("div",Ao,Na(e.errorMessage),1)):(Br(),zr("div",bo,[Mo(t.$slots,"default")]))}});/**
  * @license
  * Copyright 2010-2024 Three.js Authors
  * SPDX-License-Identifier: MIT
