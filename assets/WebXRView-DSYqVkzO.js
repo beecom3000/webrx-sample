@@ -1,4 +1,4 @@
-import{d as po,r as Ns,b as mo,o as _o,c as go,a as ri,t as vo,_ as xo}from"./index-Ce_j-ajE.js";/**
+import{d as po,r as Ns,b as mo,o as _o,c as go,a as ri,t as vo,_ as xo}from "./index-Ce_j-ajE.js";/**
  * @license
  * Copyright 2010-2024 Three.js Authors
  * SPDX-License-Identifier: MIT
