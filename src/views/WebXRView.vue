@@ -37,6 +37,7 @@ onMounted(() => {
   // gl.value = canvas.value.getContext('webgl2', { xrCompatible: true });
       // || canvas.value.getContext("webgpu");
 
+  message.value = 'First time runner';
   // message.value =
   //     gl.value instanceof WebGL2RenderingContext
   //     // || gl.value instanceof GPUCanvasContext
@@ -98,7 +99,7 @@ const activateXr = async () => {
   camera.matrixAutoUpdate = false;
 
   // Initialize a WebXR session using "immersive-ar".
-  const session: XRSession | undefined = await navigator.xr?.requestSession("immersive-ar");
+  const session: XRSession | undefined = await navigator.xr?.requestSession('immersive-ar');
   if (session === undefined) {
     throw new Error('No XRSession created');
   }
