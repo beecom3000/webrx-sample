@@ -1,6 +1,6 @@
 <template>
   <main>
-<!--    <error-handler>-->
+    <error-handler>
       <div id="drawing-area">
         <canvas ref="canvas"></canvas>
       </div>
@@ -8,7 +8,7 @@
       <div class="btn-container">
         <button @click="activateXr()">Activate XR</button>
       </div>
-<!--    </error-handler>-->
+    </error-handler>
   </main>
 </template>
 
@@ -74,8 +74,7 @@ const activateXr = async () => {
   }
   const scene = new THREE.Scene();
 
-
-// Create the cube and add it to the demo scene.
+  // Create the cube and add it to the demo scene.
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(0.2, 0.2, 0.2),
     materials
