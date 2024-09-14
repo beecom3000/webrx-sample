@@ -1,21 +1,18 @@
 <template>
   <main>
-    <error-handler>
-      <div id="drawing-area">
-        <canvas ref="canvas"></canvas>
-      </div>
-      <div>{{ message }}</div>
-      <div class="btn-container">
-        <button @click="activateXr()">Activate XR</button>
-      </div>
-    </error-handler>
+    <div id="drawing-area">
+      <canvas ref="canvas"></canvas>
+    </div>
+    <div>{{ message }}</div>
+    <div class="btn-container">
+      <button @click="activateXr()">Activate XR</button>
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onErrorCaptured, onMounted, ref } from 'vue'
 import * as THREE from 'three';
-import ErrorHandler from '@/components/ErrorHandler.vue'
 
 const canvas = ref<HTMLCanvasElement | OffscreenCanvas>();
 // const gl = ref<WebGL2RenderingContext>();
@@ -29,6 +26,11 @@ const materials = [
   new THREE.MeshBasicMaterial({color: 0x00ffff}),
   new THREE.MeshBasicMaterial({color: 0xffff00})
 ];
+
+onErrorCaptured((error: Error) => {
+  console.log(error);
+  message.value= 'Failed to activate XR: ' + error.message ?? 'None';
+});
 
 onMounted(() => {
   // Add a canvas element and initialize a WebGL context that is compatible with WebXR.
