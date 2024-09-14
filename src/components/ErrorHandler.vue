@@ -1,6 +1,8 @@
 <template>
-  <div v-if="errorObj">{{ errorObj.errorMessage }}</div>
-  <div v-else><slot></slot></div>
+  <div v-if="errorObj.error">{{ errorObj.errorMessage }}</div>
+  <div v-else>
+    <slot></slot>
+  </div>
 </template>
 
 <script setup lang="ts">
