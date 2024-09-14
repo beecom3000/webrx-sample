@@ -29,7 +29,7 @@ const materials = [
 
 onErrorCaptured((error: Error) => {
   console.log(error);
-  message.value= 'Failed to activate XR: ' + error.message ?? 'None';
+  message.value= 'Failed to activate XR: ' + (error?.message ?? 'None');
 });
 
 onMounted(() => {
