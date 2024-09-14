@@ -30,6 +30,7 @@ const materials = [
 onErrorCaptured((error: Error) => {
   console.log(error);
   message.value= 'Failed to activate XR: ' + (error?.message ?? 'None');
+  return false;
 });
 
 onMounted(() => {
@@ -72,7 +73,7 @@ const activateXr = async () => {
 
   const gl: WebGL2RenderingContext | undefined = canvas.value?.getContext('webgl2', { xrCompatible: true }) || undefined;
   if (gl === undefined) {
-    throw Error('No webgl found');
+    throw new Error('No webgl found');
   }
   const scene = new THREE.Scene();
 
