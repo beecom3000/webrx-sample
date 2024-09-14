@@ -106,15 +106,16 @@ const activateXr = async () => {
   camera.matrixAutoUpdate = false;
 
   // Initialize a WebXR session using "immersive-ar".
+  let session: XRSession | undefined;
   try {
-    const session: XRSession | undefined = await navigator.xr?.requestSession('immersive-ar');
+    session = await navigator.xr?.requestSession('immersive-ar');
     if (session === undefined) {
       throw new Error('No XRSession created');
     }
     await session.updateRenderState({
       baseLayer: new XRWebGLLayer(session, gl)
     });
-  } catch(error) {
+  } catch(error: any) {
     message.value = 'Failed to request session: ' + (error?.message ?? 'None');
     throw error;
   }
