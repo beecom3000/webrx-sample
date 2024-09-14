@@ -1,9 +1,14 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
+
+  <modal-dialog :show="showModal" @close="showModal = false">
+    <template #header>
+      <h3>Error Occurred</h3>
+    </template>
+    <template #body>
+      <div>Body of the Modal is right here</div>
+    </template>
+  </modal-dialog>
+
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -16,10 +21,23 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/webxr">WebXR</RouterLink>
       </nav>
     </div>
+
+    <button id="modal-toggle" @click="showModal = true">Show Modal</button>
+
   </header>
 
   <RouterView />
 </template>
+
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import ModalDialog from '@/components/ModalDialog.vue'
+
+const showModal = ref(false);
+
+</script>
 
 <style scoped>
 header {

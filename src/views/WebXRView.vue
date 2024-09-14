@@ -71,7 +71,12 @@ const activateXr = async () => {
   //   }
   // }
 
+  // if (true) {
+  //   throw new Error('Error not found');
+  // }
+
   const gl: WebGL2RenderingContext | undefined = canvas.value?.getContext('webgl2', { xrCompatible: true }) || undefined;
+  // const glNotFound: WebGLRenderingContext | undefined = canvas.value?.getContext('webgl', { xrCompatible: true }) || undefined;
   if (gl === undefined) {
     throw new Error('No webgl found');
   }
@@ -101,7 +106,7 @@ const activateXr = async () => {
   camera.matrixAutoUpdate = false;
 
   // Initialize a WebXR session using "immersive-ar".
-  const session: XRSession | undefined = await navigator.xr?.requestSession('immersive-ar');
+  const session: XRSession | undefined = await navigator.xr?.requestSession('inline');
   if (session === undefined) {
     throw new Error('No XRSession created');
   }

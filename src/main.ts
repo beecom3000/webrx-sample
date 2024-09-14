@@ -6,18 +6,20 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import errorHandler from '@/components/ErrorHandler.vue'
+import { useErrorStore } from '@/stores/error'
 
 const app = createApp(App)
 
-// Application level error handling
-app.config.errorHandler =
-  (err: unknown, instance: ComponentPublicInstance | null, info: string): void => {
-  console.error('Error:', err);
-  console.error('Component:', instance);
-  console.error('Info:', info);
-}
-
 app.use(createPinia())
 app.use(router)
+
+// Application level error handling
+const errorStore = useErrorStore();
+app.config.errorHandler =
+  (err: unknown, instance: ComponentPublicInstance | null, info: string): void => {
+    console.error('Error:', err);
+    console.error('Component:', instance);
+    console.error('Info:', info);
+  }
 
 app.mount('#app')
