@@ -17,9 +17,9 @@ import { onMounted, ref } from 'vue'
 import * as THREE from 'three';
 import ErrorHandler from '@/components/ErrorHandler.vue'
 
-const canvas = ref<HTMLCanvasElement | null>();
+const canvas = ref<HTMLCanvasElement | OffscreenCanvas>();
 // const gl = ref<WebGL2RenderingContext>();
-const message = ref<string>(null);
+const message = ref<string>('');
 // The cube will have a different color on each side.
 const materials = [
   new THREE.MeshBasicMaterial({color: 0xff0000}),
@@ -67,7 +67,10 @@ const activateXr = async () => {
   //   }
   // }
 
-  const gl: WebGL2RenderingContext = canvas.value.getContext('webgl2', { xrCompatible: true });
+  const gl: WebGL2RenderingContext | undefined = canvas.value?.getContext('webgl2', { xrCompatible: true }) || undefined;
+  if (gl === undefined) {
+    throw Error('No webgl found');
+  }
   const scene = new THREE.Scene();
 
 
@@ -95,8 +98,11 @@ const activateXr = async () => {
   camera.matrixAutoUpdate = false;
 
   // Initialize a WebXR session using "immersive-ar".
-  const session = await navigator.xr.requestSession("immersive-ar");
-  session.updateRenderState({
+  const session: XRSession | undefined = await navigator.xr?.requestSession("immersive-ar");
+  if (session === undefined) {
+    throw new Error('No XRSession created');
+  }
+  await session.updateRenderState({
     baseLayer: new XRWebGLLayer(session, gl)
   });
 
@@ -105,14 +111,14 @@ const activateXr = async () => {
   const referenceSpace = await session.requestReferenceSpace('local');
 
   // Create a render loop that allows us to draw on the AR view.
-  const onXRFrame = (time, frame) => {
+  const onXRFrame = (time: DOMHighResTimeStamp, frame: XRFrame): void => {
     // Queue up the next draw request.
     session.requestAnimationFrame(onXRFrame);
 
     // Bind the graphics framebuffer to the baseLayer's framebuffer
     gl.bindFramebuffer(
       gl.FRAMEBUFFER,
-      session.renderState.baseLayer.framebuffer
+      session.renderState.baseLayer?.framebuffer || null
     )
 
     // Retrieve the pose of the device.
@@ -122,7 +128,10 @@ const activateXr = async () => {
       // In mobile AR, we only have one view.
       const view = pose.views[0];
 
-      const viewport = session.renderState.baseLayer.getViewport(view);
+      const viewport: XRViewport | undefined = session.renderState?.baseLayer?.getViewport(view);
+      if (viewport === undefined) {
+        throw Error('there is no XRViewport');
+      }
       renderer.setSize(viewport.width, viewport.height)
 
       // Use the view's transform matrix and projection matrix to configure the THREE.camera.

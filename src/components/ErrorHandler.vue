@@ -4,14 +4,19 @@
 </template>
 
 <script setup lang="ts">
-import { type ComponentInternalInstance, onErrorCaptured, reactive } from 'vue'
+import { onErrorCaptured, reactive } from 'vue'
 
-const errorObj = reactive({
+interface ErrorObject {
+  error: Error | null,
+  errorMessage: string
+}
+
+const errorObj: ErrorObject = reactive({
   error: null,
   errorMessage: ''
 });
 
-onErrorCaptured( (error: ErrorCapturedHook, target?: ComponentInternalInstance | null) => {
+onErrorCaptured( (error: Error) => {
   errorObj.error = error;
   errorObj.errorMessage = error.message;
 });

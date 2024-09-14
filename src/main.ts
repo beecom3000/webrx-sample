@@ -11,7 +11,7 @@ const app = createApp(App)
 
 // Application level error handling
 app.config.errorHandler =
-  (err: unknown, instance: ComponentPublicInstance, info: string) => {
+  (err: unknown, instance: ComponentPublicInstance | null, info: string): void => {
   console.error('Error:', err);
   console.error('Component:', instance);
   console.error('Info:', info);
