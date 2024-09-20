@@ -105,11 +105,22 @@ const activateXr = async () => {
   const camera = new THREE.PerspectiveCamera();
   camera.matrixAutoUpdate = false;
 
+
+
   // Initialize a WebXR session using "immersive-ar".
+  // Check to see if there is an XR device available that supports immersive VR
+  // presentation (for example: displaying in a headset). If the device has that
+  // capability the page will want to add an "Enter VR" button to the page (similar to
+  // a "Fullscreen" button) that starts the display of immersive VR content.
+  const mode: XRSessionMode = 'immersive-ar';
+  const supported = await navigator.xr?.isSessionSupported(mode) ?? false;
+  if (!supported) {
+    throw new Error(`${mode} is not supported`);
+  }
   let session: XRSession | undefined;
   try {
-    session = await navigator.xr?.requestSession('immersive-ar');
-    if (session === undefined) {
+    session = await navigator.xr?.requestSession(mode) ?? undefined;
+    if (!session) {
       throw new Error('No XRSession created');
     }
     await session.updateRenderState({
@@ -159,6 +170,23 @@ const activateXr = async () => {
   }
   session.requestAnimationFrame(onXRFrame);
 }
+
+// async function checkForSupport(mode: XRSessionMode) {
+//   // Check to see if there is an XR device available that supports immersive VR
+//   // presentation (for example: displaying in a headset). If the device has that
+//   // capability the page will want to add an "Enter VR" button to the page (similar to
+//   // a "Fullscreen" button) that starts the display of immersive VR content.
+//   navigator.xr.isSessionSupported(mode).then((supported) => {
+//     if (supported) {
+//       const enterXrBtn = document.createElement("button");
+//       enterXrBtn.innerHTML = "Enter VR";
+//       enterXrBtn.addEventListener("click", beginXRSession);
+//       document.body.appendChild(enterXrBtn);
+//     } else {
+//       console.log("Session not supported: " + reason);
+//     }
+//   });
+// }
 </script>
 
 <style scoped>

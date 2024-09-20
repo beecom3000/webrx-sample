@@ -2,10 +2,15 @@
 
   <modal-dialog :show="showModal" @close="showModal = false">
     <template #header>
-      <h3>Error Occurred</h3>
+      <h3>Something went wrong</h3>
     </template>
     <template #body>
-      <div>Body of the Modal is right here</div>
+      <div>
+        Error occurred:
+        Error: {{error}}
+        Component: {{instance}}
+        Info: {{info}}
+      </div>
     </template>
   </modal-dialog>
 
@@ -22,8 +27,6 @@
       </nav>
     </div>
 
-    <button id="modal-toggle" @click="showModal = true">Show Modal</button>
-
   </header>
 
   <RouterView />
@@ -32,10 +35,16 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ModalDialog from '@/components/ModalDialog.vue'
+import { useErrorStore } from '@/stores/error'
+import { storeToRefs } from 'pinia'
 
 const showModal = ref(false);
+
+const errorStore = useErrorStore();
+
+const { error, instance, info } = storeToRefs(errorStore);
 
 </script>
 

@@ -20,6 +20,10 @@ app.config.errorHandler =
     console.error('Error:', err);
     console.error('Component:', instance);
     console.error('Info:', info);
+
+    errorStore.setError(err);
+    errorStore.setInstance(instance);
+    errorStore.setInfo(info ?? '');
   }
 
 app.mount('#app')
