@@ -1,19 +1,5 @@
 <template>
 
-  <modal-dialog :show="showModal" @close="showModal = false">
-    <template #header>
-      <h3>Something went wrong</h3>
-    </template>
-    <template #body>
-      <div>
-        Error occurred:
-        Error: {{error}}
-        Component: {{instance}}
-        Info: {{info}}
-      </div>
-    </template>
-  </modal-dialog>
-
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -35,16 +21,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { computed, ref } from 'vue'
-import ModalDialog from '@/components/ModalDialog.vue'
-import { useErrorStore } from '@/stores/error'
-import { storeToRefs } from 'pinia'
 
-const showModal = ref(false);
+// const errorStore = useErrorStore();
 
-const errorStore = useErrorStore();
+// const { error, instance, info } = storeToRefs(errorStore);
 
-const { error, instance, info } = storeToRefs(errorStore);
+// watch(error, (oldValue, newValue) => {
+//   console.log(oldValue, newValue);
+//   if (newValue) {
+//     showModal.value = true;
+//   } else {
+//     showModal.value = false;
+//   }
+// })
 
 </script>
 

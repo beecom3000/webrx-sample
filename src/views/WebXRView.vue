@@ -3,20 +3,34 @@
     <div id="drawing-area">
       <canvas ref="canvas"></canvas>
     </div>
-    <div>{{ message }}</div>
     <div class="btn-container">
       <button @click="activateXr()">Activate XR</button>
     </div>
+    <modal-dialog :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>Something went wrong</h3>
+      </template>
+      <template #body>
+        <div>
+          Error occurred: {{ message }}
+        </div>
+      </template>
+    </modal-dialog>
   </main>
+
+
 </template>
 
 <script setup lang="ts">
 import { onErrorCaptured, onMounted, ref } from 'vue'
 import * as THREE from 'three';
+import ModalDialog from '@/components/ModalDialog.vue'
 
 const canvas = ref<HTMLCanvasElement | OffscreenCanvas>();
 // const gl = ref<WebGL2RenderingContext>();
 const message = ref<string>('');
+const showModal = ref<boolean>(false);
+
 // The cube will have a different color on each side.
 const materials = [
   new THREE.MeshBasicMaterial({color: 0xff0000}),
@@ -30,6 +44,8 @@ const materials = [
 onErrorCaptured((error: Error) => {
   console.log(error);
   message.value= 'Failed to activate XR: ' + (error?.message ?? 'None');
+  alert(message.value);
+  showModal.value = true;
   return false;
 });
 
@@ -115,21 +131,13 @@ const activateXr = async () => {
   const mode: XRSessionMode = 'immersive-ar';
   const supported = await navigator.xr?.isSessionSupported(mode) ?? false;
   if (!supported) {
-    throw new Error(`${mode} is not supported`);
+    throw new Error(`${mode} is not supported in this browser`);
   }
-  let session: XRSession | undefined;
-  try {
-    session = await navigator.xr?.requestSession(mode) ?? undefined;
-    if (!session) {
-      throw new Error('No XRSession created');
-    }
+  let session: XRSession | undefined  = await navigator.xr?.requestSession(mode) ?? undefined;
+  if (!session) { throw new Error(`${mode} session is undefined`); }
     await session.updateRenderState({
       baseLayer: new XRWebGLLayer(session, gl)
     });
-  } catch(error: any) {
-    message.value = 'Failed to request session: ' + (error?.message ?? 'None');
-    throw error;
-  }
 
 // A 'local' reference space has a native origin that is located
 // near the viewer's position at the time the session was created.
@@ -187,6 +195,7 @@ const activateXr = async () => {
 //     }
 //   });
 // }
+
 </script>
 
 <style scoped>
