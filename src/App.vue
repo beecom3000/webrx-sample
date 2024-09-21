@@ -1,6 +1,6 @@
 <template>
 
-  <modal-dialog :show="showModel" @close="showModal = false">
+  <modal-dialog :show="showModal" @close="showModal = false">
     <template #header>
       <h3>Something went wrong</h3>
     </template>
