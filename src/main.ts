@@ -20,7 +20,7 @@ app.config.errorHandler =
     console.error('Error:', err);
     console.error('Component:', instance);
     console.error('Info:', info);
-
+    console.log(JSON.stringify(err));
     alert('Error: ' + err);
   }
 
