@@ -53,14 +53,14 @@ watch(error, (oldValue, newValue) => {
     showModal.value = false;
   }
 })
-const showModel = computed({
-  get() {
-    return error.value !== undefined;
-  },
-  set(value) {
-    showModal.value = value;
-  }
-})
+// const showModel = computed({
+//   get() {
+//     return error.value !== undefined;
+//   },
+//   set(value) {
+//     showModal.value = value;
+//   }
+// })
 
 </script>
 
