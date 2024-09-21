@@ -47,6 +47,7 @@ const { error, instance, info } = storeToRefs(errorStore);
 
 watch(error, (oldValue, newValue) => {
   if (newValue) {
+    console.log(JSON.stringify(newValue));
     showModal.value = true;
   } else {
     showModal.value = false;
