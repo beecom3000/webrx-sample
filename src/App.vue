@@ -24,6 +24,7 @@
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/webxr">WebXR</RouterLink>
+        <RouterLink to="/tutorial">WebXR Tutorial</RouterLink>
       </nav>
     </div>
 
@@ -35,7 +36,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import { computed, ref, watch } from 'vue'
+import {  ref, watch } from 'vue'
 import ModalDialog from '@/components/ModalDialog.vue'
 import { useErrorStore } from '@/stores/error'
 import { storeToRefs } from 'pinia'
@@ -46,7 +47,7 @@ const errorStore = useErrorStore();
 const { error, instance, info } = storeToRefs(errorStore);
 
 watch(error, (oldValue, newValue) => {
-  if (newValue) {
+  if (newValue !== null) {
     console.log(JSON.stringify(newValue));
     showModal.value = true;
   } else {

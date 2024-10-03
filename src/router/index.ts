@@ -21,6 +21,16 @@ const router = createRouter({
       path: '/webxr',
       name: 'webxr',
       component: () => import('../views/WebXRView.vue')
+    },
+    // {
+    //   path: '/webxr-sample',
+    //   name: 'webxr-sample',
+    //   component: () => import('../views/WebXRSampleView.vue')
+    // },
+    {
+      path: '/tutorial',
+      name: 'tutorial',
+      component: () => import('../views/WebXrTutorial.vue')
     }
   ]
 })

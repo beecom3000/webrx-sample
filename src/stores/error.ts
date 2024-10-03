@@ -26,14 +26,10 @@ export const useErrorStore = defineStore({
     }
   },
   actions: {
-    setError(error: unknown | null): void  {
+    setError(error: unknown | null, instance: ComponentPublicInstance | null, info: string): void  {
       this.error = error;
-    },
-    setInstance(instance: ComponentPublicInstance | null): void {
       this.instance = instance;
-    },
-    setInfo(info: string): void {
-      this.info = info ;
+      this.info = info;
     }
   }
 });

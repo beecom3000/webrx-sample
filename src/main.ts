@@ -21,7 +21,8 @@ app.config.errorHandler =
     console.error('Component:', instance);
     console.error('Info:', info);
     console.log(JSON.stringify(err));
-    alert('Error: ' + err);
+    // alert(err + ', info: ' + info);
+    errorStore.setError(err, instance, info);
   }
 
 app.mount('#app')
