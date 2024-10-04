@@ -21,9 +21,9 @@
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/babylon">Babylon</RouterLink>
-<!--        <RouterLink to="/webxr">WebXR</RouterLink>-->
-        <RouterLink to="/tutorial">Tutorial</RouterLink>
+<!--        <RouterLink to="/babylon">Babylon</RouterLink>-->
+<!--&lt;!&ndash;        <RouterLink to="/webxr">WebXR</RouterLink>&ndash;&gt;-->
+<!--        <RouterLink to="/tutorial">Tutorial</RouterLink>-->
       </nav>
     </div>
 
