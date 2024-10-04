@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@babylonjs/core": "^7.28.0",
     "pinia": "^2.1.7",
     "three": "^0.168.0",
     "vue": "^3.4.29",

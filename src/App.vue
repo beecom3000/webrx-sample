@@ -6,10 +6,9 @@
     </template>
     <template #body>
       <div>
-        Error occurred:
-        Error: {{error}}
-        Component: {{instance}}
-        Info: {{info}}
+        <p>Error: '{{error}}'</p>
+        <p>Component: {{instance}}</p>
+        <p>Info: {{info}}</p>
       </div>
     </template>
   </modal-dialog>
@@ -22,9 +21,9 @@
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/webxr">WebXR</RouterLink>
-        <RouterLink to="/tutorial">WebXR Tutorial</RouterLink>
+        <RouterLink to="/babylon">Babylon</RouterLink>
+<!--        <RouterLink to="/webxr">WebXR</RouterLink>-->
+        <RouterLink to="/tutorial">Tutorial</RouterLink>
       </nav>
     </div>
 

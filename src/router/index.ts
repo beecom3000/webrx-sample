@@ -31,6 +31,11 @@ const router = createRouter({
       path: '/tutorial',
       name: 'tutorial',
       component: () => import('../views/WebXrTutorial.vue')
+    },
+    {
+      path: '/babylon',
+      name: 'babylon',
+      component: () => import('../views/WebXRBabylonView.vue')
     }
   ]
 })
