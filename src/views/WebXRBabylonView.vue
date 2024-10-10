@@ -18,6 +18,7 @@ import {
   StandardMaterial,
   Vector3
 } from '@babylonjs/core'
+// import * as Soundfont from 'soundfont-player/dist/soundfont-player'
 import type { ActionEvent } from '@babylonjs/core/Actions/actionEvent'
 import { WebXRDefaultExperience } from '@babylonjs/core/XR/webXRDefaultExperience'
 

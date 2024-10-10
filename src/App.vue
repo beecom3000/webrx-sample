@@ -21,7 +21,8 @@
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-<!--        <RouterLink to="/babylon">Babylon</RouterLink>-->
+        <RouterLink to="/piano">Piano</RouterLink>
+        <RouterLink to="/portal">Portal</RouterLink>
 <!--&lt;!&ndash;        <RouterLink to="/webxr">WebXR</RouterLink>&ndash;&gt;-->
 <!--        <RouterLink to="/tutorial">Tutorial</RouterLink>-->
       </nav>
@@ -34,7 +35,6 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import {  ref, watch } from 'vue'
 import ModalDialog from '@/components/ModalDialog.vue'
 import { useErrorStore } from '@/stores/error'
@@ -104,7 +104,7 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    //padding-right: calc(var(--section-gap) / 0.5);
   }
 
   .logo {
